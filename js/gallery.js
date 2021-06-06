@@ -16,7 +16,7 @@ function createGallery() {
         return `
         <li class='gallery__item'>
           <a class='gallery__link' href=${original}>
-            <img class='gallery__img' src ='${preview}' data-source = '${original}' alt=${description}>
+            <img class='gallery__image' src ='${preview}' data-source = '${original}' alt=${description}>
           </a>
         </li>`
       })
@@ -35,16 +35,17 @@ function modalOpen(event) {
   refs.modalWindow.classList.add('is-open');
   refs.modalImage.src = event.target.dataset.source;
   refs.modalImage.alt = event.target.alt;
+  window.addEventListener('keydown', onEscPress);
 }
 
 refs.modalCloseBtn.addEventListener('click', modalClose);
 refs.modalWindow.addEventListener('click', modalClose);
-window.addEventListener('keydown', onEscPress);
 
 function modalClose() {
   refs.modalWindow.classList.remove('is-open');
   refs.modalImage.src = '';
   refs.modalImage.alt = '';
+  window.removeEventListener('keydown', onEscPress);
 };
 
 function onEscPress(evt) {
